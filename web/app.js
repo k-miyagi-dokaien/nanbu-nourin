@@ -1,0 +1,334 @@
+(() => {
+  const listEl = document.getElementById('articles');
+  const preview = document.getElementById('preview');
+  const btnHtml = document.getElementById('downloadHtml');
+  const btnMd = document.getElementById('downloadMd');
+  const btnJson = document.getElementById('downloadJson');
+  const pasteInput = document.getElementById('pasteInput');
+  const parseBtn = document.getElementById('parseBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const sampleBtn = document.getElementById('sampleBtn');
+  const defaultSampleText = `（目的）
+第 1 条
+本業務は、農業用ため池における防災工事の必要性の判断のため、ため池工事特措法に位置付けられた以下の評価を行うことを目的とする。
+1)	劣化状況評価
+2)	地震・豪雨耐性評価のうち、地震によるもの
+（共通仕様書の適用）
+第 2 条
+本業務は、沖縄県農林水産部制定の以下の共通仕様書及び関係法規等に基づいて実施するほか、この特記仕様書により実施するものとする。
+1)	「設計業務共通仕様書【農業農村整備編】（令和7年10月）」（以下、「設計共通仕様書」という）
+2)	「地質・土質調査業務共通仕様書【農業農村整備編】（令和7年10月）」（以下、「土質調査共通仕様書」という）
+3)	「測量業務共通仕様書【農業農村整備編】（令和7年10月）」（以下、「測量共通仕様書」という）
+4)	「磁気探査業務共通仕様書【農業農村整備編】（令和7年10月）」（以下、「磁気探査共通仕様書」という）
+（場所）
+第 3 条
+本業務において対象とする農業用ため池は以下であり、別紙図面に示す通りとする。
+劣化状況評価：上溝1号、 上溝2号
+地震耐性評価：上溝1号、 上溝2号
+（管理技術者の資格）
+第 4 条
+管理技術者の資格については、「設計共通仕様書」1-6第3項によるものとし、業務に該当する部門・選択科目は、下記の通りとする。
+（照査技術者の資格）
+第 5 条
+本業務においては照査技術者を定めることとする。その資格については、「設計共通仕様書」1-7第2項によるものとし、業務に該当する部門・選択科目は、下記の通りとする。
+（管理技術者の直接的雇用関係について）
+第 6 条
+管理技術者は、本業務の受注者と直接的な雇用関係があること。なお、「直接的な雇用関係」とは、本業務契約締結時において、雇用関係があることをいう。
+「直接的な雇用関係」を証明する資料（健康保険被保険者証または雇用保険被保険者証券険者の写し等、公的なもの）を、着手届と共に提出するものとする。
+（配置技術者の確認について）
+第 7 条
+受注者は、業務計画書に配置技術者の立場・役割を明確に記載するものとする。なお、配置技術者を変更する際も同様とし、変更業務計画書において、記載する。
+業務実績情報システム（アグリス）に登録できる技術者については、以下のとおりとする。
+1)	調査職員と業務に関する報告・連絡・調整等を行い、当該業務に携わっていることが明確な技術者
+2)	上記１）のほか、現地作業が主となる技術者においては、現地作業を実施していることを写真等で確認できる者
+業務実績情報システム（アグリス）に登録する技術者は、業務完了までに、受発注者双方の確認の上、確定するものとする。
+業務完了時に、「様式○○『業務従事技術者情報』」を提出するものとし、提出にあたり、技術者本人の登録に関する認識の確認のため、個々の技術者の署名を付すものとする。
+発注者は、業務計画書に記載された配置技術者のいずれかが当該業務に従事していないことが明らかとなった場合、指名停止等の措置を講ずることがある。また、配置技術者以外が業務実情情報システム（アグリス）へ登録された場合についても、同様とする。
+（履行報告）
+第 8 条
+「設計共通仕様書」1-33に定める履行報告は毎月５日までに報告するものとし、前月までの進捗状況及び当月の業務予定を報告すること。なお、5日が土日祝祭日の場合は、翌開庁日までとする。
+（保険加入）
+第 9 条
+受注者は、「設計共通仕様書」1-37に示されている保険に加入している旨（以下の例を参照）を業務計画書を明示すること。ただし、調査職員からの請求があった場合は、保険加入を証明する書類を提示しなければならない。
+（例）設計業務共通仕様書1-37保険加入の義務に基づき、雇用者等を被保険者とする保険に加入しています。
+（業務委託料を変更する場合の落札率の適用について）
+第 10 条
+委託業務の内容または数量等に変更が生じ業務委託料の変更が生じた場合、協議の対象となる変更業務料は、本業務料の変更設計額に落札率（当初契約額÷当初設計額）を乗じたものとする。
+変更業務委託料＝変更設計額	×	落札率
+落札率	＝当初契約額	÷	当初設計額
+（業務環境改善）
+第 11 条
+業務環境に関しては、沖縄県農林水産部制定の業務環境改善実施要領（案）（令和2年3月）の「3.取組内容」について、業務着手時の打合せの際に協議し、取組内容を設定すること。なお、取組内容は打合せ記録簿へ記録すること。
+（貸与資料）
+第 12 条
+本業務にかかる貸与資料は以下の通りとする。また、受注者は、本業務実施のため必要となる資料の貸与を受けることができる。
+なお、貸与資料は第１回打合せ時に一括貸与するのもとし、完了検査時に一括返納しなければならない。ただし、業務期間中であっても調査職員は返納の要求ができるものとする。
+1)	ため池台帳
+（適用図書）
+第 13 条
+本業務に適用・準用する示方書、参考文献等は各「共通仕様書」によるほか、以下によるものとする。
+なお、各図書は時点最新版を用い、初回打合せの際に各図書の適用年度について報告するものし、履行期間中に改訂された場合は協議するものとする。
+1)	土地改良事業設計指針「ため池整備」 （農林水産省農村振興局）
+2)	土地改良事業計画設計基準 設計「ダム」 （農林水産省農村振興局）
+3)	防災重点農業用ため池の劣化状況評価等の手引き （農林水産省農村振興局整備部防災課）
+4)	土地改良事業設計指針「耐震設計」 （農林水産省農村振興局）
+（作業項目）
+第 14 条
+本業務における作業項目は別紙の通りとする。
+（地質・土質調査業務）
+第 15 条
+地質・土質調査業務の調査位置・項目については、既存資料や現地踏査結果等を踏まえ、事前に調査職員と協議した上で決定すること。
+また、磁気探査業務を行い、安全性確保の後に掘削等を実施するものとし、安全性確保が困難な場合は、調査位置の変更を調査職員と協議することとする。
+（測量業務）
+第 16 条
+測量業務の範囲・項目については、現地踏査等を踏まえ、事前に調査職員と協議した上で決定すること。
+（業務計画書）
+第 17 条
+「設計共通仕様書」1-11に示される業務計画書の作成にあたっては、本業務に含まれる業務全体の計画がわかるように整理することとする。
+（地元関係者との交渉等）
+第 18 条
+発注者が業務に関連して受益者を対象とした地元説明会等を開催する場合は、受注者も同席するものとし、その説明資料及び議事録等の作成を行うものとする。
+また、関係機関（市町村、土地改良区、道路管理者など関係法令の手続き等の必要な相手方）と調整する必要が生じた場合も同様とする。
+（打合せ）
+第 19 条
+「設計共通仕様書」1-10における打合せの時期及び回数については、主として下記の段階で行うものとし、初回及び最終の打合せには管理技術者が同席するものとする。
+なお、業務の中間段階において、調査職員から概要説明（プレゼン等）を求めた場合においては、受注者にて説明に必要な書類を作成し、対応するものとする。
+また、本業務遂行のために委託数量に変更のある場合（概算含む）は、その理由を整理し、速やかに調査職員に報告するものとする。
+初回：業務着手段階
+中間：中間打合せ
+最終：報告書原稿作成段階
+（情報共有システムの使用）
+第 20 条
+本業務は、沖縄県が指定する情報共有システムを使用するものとし、指定の情報共有システムが使用可能なインターネット環境を整えるものとする。
+なお、沖縄県CALSシステムの利用にあたっては、使用許諾料を、沖縄県CALSシステムを運営している者に支払うこと。
+（地盤情報データベースへの登録）
+第 21 条
+ボーリング成果は、「土質調査共通仕様書」1-17に基づき、地盤情報を「一般財団法人国土地盤情報センター」の検定を受けた上で、「国土地盤情報データベース」に登録しなければならない。
+なお、検定の申し込みに当たり、地盤情報の公開・利用の可否について、発注者と協議を行うものとする。
+（成果物）
+第 22 条
+本業務は電子納品対象業務とする。電子納品とは、調査、設計、工事等の各業務段階の最終成果を電子データで納品することを言う。ここでいう電子データとは、「土木設計業務等の電子納品要領（案）」（以下、要領）に示されたファイルフォーマットに基づいて作成されたものを指す。
+なお、書面における署名又は押印の取扱いについては、別途調査職員と協議するものとする。
+成果品は、「要領」に基づいた電子データとなっているか確認をしたうえ電子媒体で提出する。「要領」で特に記載がない項目については、原則として、成果を電子化して提出する義務はないが、調査職員と協議のうえ、電子化の是非を決定する。なお、「紙」による報告書の提出は、調査職員と協議のうえ決定する。
+写真は「デジタル写真管理情報基準（案）」に準拠して作成しなければならない。
+図面の作成にあたっては、「CAD製図基準（案）」に準拠して作成しなければならない。
+電子納品に適用又は準用する要領（案）等は下記に示すものとする。
+成果物は以下の通りとする。
+①	報告書（A4サイズ） ：２部
+②	土質調査報告書（A4サイズ） ：2部※土質調査業務がある場合
+③	測量成果簿（A4サイズ） ：2部※測量業務がある場合
+④	電子成果品：2部
+成果品の装丁は下記によるものとする。
+①	製本上極力分冊をさけ、やむなく分冊を行う場合は内容の区分を配慮して行うものとする。
+②	報告書は、長期の使用に耐える通常の装丁を行う。なお、電子データはCD-R等で提出すること。
+③	電子成果物は、各要領（案）に基づいた電子データになっているか、電子納品チェックソフトでチェックを行い、確認後、発注者へ提出するものとする。
+（一般承諾事項）
+第 23 条
+本特記仕様書に定めのない事項、または本業務の履行にあたり疑義が生じた場合には必要に応じて、受注者と発者で協議するものとする。`;
+
+  let template = null;
+  let excluded = new Set();
+
+  function renderList() {
+    listEl.innerHTML = '';
+    if (!template) return;
+    const articles = template.articles.slice().sort((a,b)=>a.no-b.no);
+    for (const a of articles) {
+      const row = document.createElement('div');
+      row.className = 'article';
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.checked = excluded.has(a.no);
+      cb.addEventListener('change', () => {
+        if (cb.checked) excluded.add(a.no); else excluded.delete(a.no);
+        updatePreview();
+      });
+      const no = document.createElement('div');
+      no.className = 'no';
+      no.textContent = `第${a.no}条`;
+      const title = document.createElement('div');
+      title.className = 'title';
+      title.textContent = a.title || '';
+      row.append(cb, no, title);
+      listEl.appendChild(row);
+    }
+  }
+
+  function buildSelectedArticles() {
+    const kept = template.articles.filter(a => !excluded.has(a.no)).sort((a,b)=>a.no-b.no);
+    // renumber sequentially starting at 1
+    kept.forEach((a, idx) => { a._newNo = idx + 1; });
+    return kept;
+  }
+
+  function htmlFromTemplate(tpl) {
+    const kept = buildSelectedArticles();
+    const lines = [];
+    lines.push('<!doctype html>');
+    lines.push('<html lang="ja"><head><meta charset="utf-8"><title>特記仕様書</title>');
+    lines.push('<style>body{font-family: system-ui, Noto Sans JP, sans-serif; line-height:1.8;} .article{margin:24px 0; padding-bottom:16px; border-bottom:1px solid #ddd;} .article:last-of-type{border-bottom:none;} .head{font-weight:700;font-size:16px; page-break-after:avoid;} .no{margin-right:6px;color:#666} pre{white-space:pre-wrap; font-family:inherit; margin:12px 0;} @media print { body{margin:12mm;} .article{page-break-inside:avoid; break-inside:avoid;} pre{page-break-inside:avoid;} }</style>');
+    lines.push('</head><body>');
+    for (const a of kept) {
+      lines.push('<div class="article">');
+      const title = a.title ? `（${escapeHtml(a.title)}）` : '';
+      lines.push(`<div class="head"><span class="no">第 ${a._newNo} 条</span>${title}</div>`);
+      const body = (a.bodyMd||'');
+      lines.push(`<pre>${escapeHtml(body)}</pre>`);
+      lines.push('</div>');
+    }
+    lines.push('</body></html>');
+    return lines.join('\n');
+  }
+
+  function mdFromTemplate(tpl){
+    const kept = buildSelectedArticles();
+    const out = [];
+    for (const a of kept) {
+      out.push('', `## 第${a._newNo}条（${a.title||''}）`, '', a.bodyMd||'');
+    }
+    return out.join('\n');
+  }
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>\"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]));
+  }
+
+  function updatePreview(){
+    if (!template){
+      btnHtml.disabled = btnMd.disabled = btnJson.disabled = true;
+      preview.srcdoc = '';
+      return;
+    }
+    btnHtml.disabled = btnMd.disabled = btnJson.disabled = false;
+    const html = htmlFromTemplate(template);
+    preview.srcdoc = html;
+  }
+
+  function loadTemplate(obj){
+    template = JSON.parse(JSON.stringify(obj)); // deep copy
+    excluded.clear();
+    renderList();
+    updatePreview();
+  }
+
+  function download(filename, content, type){
+    const blob = new Blob([content], {type});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    a.click();
+    setTimeout(()=>URL.revokeObjectURL(a.href), 1000);
+  }
+
+  btnHtml.addEventListener('click', () => {
+    const html = htmlFromTemplate(template);
+    download('tokki.html', html, 'text/html');
+  });
+  btnMd.addEventListener('click', () => {
+    const md = mdFromTemplate(template);
+    download('tokki.md', md, 'text/markdown');
+  });
+  btnJson.addEventListener('click', () => {
+    const kept = buildSelectedArticles().map(a=>({no:a._newNo, title:a.title, optional:a.optional, bodyMd:a.bodyMd}));
+    const out = {...template, articles: kept};
+    download('template.json', JSON.stringify(out, null, 2), 'application/json');
+  });
+
+  // ===============
+  // Text Parser
+  // ===============
+  function parseTextToTemplate(text){
+    const lines = text.split(/\r?\n/).map(l=>l.replace(/\u00A0/g,' ').trimEnd());
+    const overview = parseOverview(lines);
+    const articles = parseArticles(lines);
+    return {
+      "$schema": "https://example.local/schema/tokki.json",
+      version: "1.0",
+      meta: { title: "特記仕様書", agency: "", createdAt: "", source: "paste" },
+      overview, articles
+    };
+  }
+
+  function parseOverview(lines){
+    const keys = ["業務名","業務場所","工期"]; const found = Object.fromEntries(keys.map(k=>[k,""]));
+    for (let i=0; i<Math.min(lines.length, 120); i++){
+      const line = lines[i];
+      for (const k of keys){
+        if (line.includes(k)){
+          let val = '';
+          const m = line.split(/[:：\t]/);
+          if (m.length>1 && m[1].trim()) val = m.slice(1).join(':').trim();
+          else if (lines[i+1] && !/^第\s*\d+\s*条/.test(lines[i+1])) val = lines[i+1].trim();
+          if (val) found[k] = val;
+        }
+      }
+    }
+    return { type: 'table', fields: keys.map(k=>({key:k, value:found[k], required:true})) };
+  }
+
+  function parseArticles(lines){
+    const articles = [];
+    let cur = null; let pendingTitle = null;
+    const reInline = /^第\s*([0-9]+)\s*条（(.+?)）$/; // same-line
+    const reArticle = /^第\s*([0-9]+)\s*条\s*$/;    // number-only line
+    const reParenLine = /^[（\(].+[）\)]$/;          // bracket-only line
+
+    const push = ()=>{
+      if (!cur) return;
+      while (cur.body.length && !cur.body[cur.body.length-1].trim()) cur.body.pop();
+      articles.push({ no: cur.no, title: cur.title || `条${cur.no}`, optional: ![1,2,22].includes(cur.no), bodyMd: cur.body.join('\n') });
+      cur = null;
+    };
+
+    for (const raw of lines){
+      const line = raw.trim();
+      if (!line){ if (cur) cur.body.push(''); continue; }
+      const mInline = line.match(reInline);
+      if (mInline){ push(); cur={no:parseInt(mInline[1],10), title:mInline[2].trim(), body:[]}; pendingTitle=null; continue; }
+      if (reParenLine.test(line)){ pendingTitle = normalizeBrackets(line); continue; }
+      const mArt = line.match(reArticle);
+      if (mArt){ push(); cur={no:parseInt(mArt[1],10), title:pendingTitle||null, body:[]}; pendingTitle=null; continue; }
+      if (!cur) continue; // ignore preface
+      cur.body.push(line);
+    }
+    push();
+    articles.sort((a,b)=>a.no-b.no);
+    return articles;
+  }
+
+  function normalizeBrackets(s){
+    s = s.trim().replace('（','(').replace('）',')');
+    const m = s.match(/^\((.+)\)$/); return m? m[1].trim(): s;
+  }
+
+  parseBtn.addEventListener('click', () => {
+    const text = (pasteInput.value || '').trimEnd();
+    if (!text.trim()) {
+      alert('テキストを入力してください');
+      return;
+    }
+    const tpl = parseTextToTemplate(text);
+    loadTemplate(tpl);
+  });
+
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      template = null;
+      excluded.clear();
+      if (pasteInput) pasteInput.value = '';
+      listEl.innerHTML = '';
+      preview.srcdoc = '';
+      btnHtml.disabled = true;
+      btnMd.disabled = true;
+      btnJson.disabled = true;
+    });
+  }
+
+  if (sampleBtn) {
+    sampleBtn.addEventListener('click', () => {
+      if (pasteInput) pasteInput.value = defaultSampleText;
+      const tpl = parseTextToTemplate(defaultSampleText);
+      loadTemplate(tpl);
+    });
+  }
+})();

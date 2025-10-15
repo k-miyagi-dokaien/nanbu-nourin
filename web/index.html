@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>特記仕様書ツール（試作）</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>特記仕様書ツール（試作）</h1>
+    </header>
+
+    <main>
+      <section>
+        <h2>解析（テキスト貼り付け）</h2>
+        <p class="hint">DOCXからコピーしたテキスト、またはプレーンテキストを貼り付け、「解析する」を押してください。</p>
+        <textarea id="pasteInput" rows="10" placeholder="ここにテキストを貼り付け"></textarea>
+        <div class="actions">
+          <button id="resetBtn" type="button">リセット</button>
+          <button id="sampleBtn" type="button">サンプル</button>
+          <button id="parseBtn">解析する</button>
+        </div>
+      </section>
+
+      <section>
+        <h2>選択・出力</h2>
+        <div class="grid">
+          <div>
+            <h3>条項一覧</h3>
+            <div id="articles"></div>
+          </div>
+          <div>
+            <h3>プレビュー</h3>
+            <iframe id="preview" title="preview"></iframe>
+          </div>
+        </div>
+        <div class="actions">
+          <button id="downloadHtml" disabled>HTMLダウンロード</button>
+          <button id="downloadMd" disabled>Markdownダウンロード</button>
+          <button id="downloadJson" disabled>JSONダウンロード</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <small>v0.1-proto</small>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+  </html>
